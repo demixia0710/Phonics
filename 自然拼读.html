@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语字母家族 · 自然拼读学习路径</title>
+    <style>
+        :root {
+            --primary-bg: #1a2a44;
+            --card-bg: #f8fafc;
+            --text-dark: #334155;
+            /* 层级颜色 */
+            --color-1: #0ea5e9; --color-2: #10b981; --color-3: #f59e0b;
+            --color-4: #8b5cf6; --color-5: #ef4444; --color-6: #0369a1;
+            --color-7: #475569;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 页眉 */
+        header {
+            background-color: var(--primary-bg);
+            color: white;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 { margin: 0; font-size: 2.2rem; letter-spacing: 2px; }
+        header p { opacity: 0.8; margin-top: 10px; }
+
+        /* 容器 */
+        .container {
+            max-width: 800px;
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        /* 交互卡片样式 */
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .level-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        /* 左侧层级标识 */
+        .level-badge {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            padding: 20px;
+        }
+        .level-badge span { font-size: 0.8rem; opacity: 0.9; }
+        .level-badge strong { font-size: 1.5rem; }
+
+        /* 内容区 */
+        .level-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .level-content h3 { margin: 0; color: var(--text-dark); font-size: 1.2rem; }
+        .level-content .subtitle { color: #64748b; font-size: 0.9rem; margin-top: 4px; }
+
+        /* 隐藏的详细面板 */
+        .details {
+            display: none;
+            padding: 20px;
+            background: #fff;
+            border-top: 1px dashed #e2e8f0;
+            border-radius: 0 0 12px 12px;
+            margin-top: -16px;
+            margin-bottom: 16px;
+        }
+
+        .details.active { display: block; animation: fadeIn 0.3s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .word-tag {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin: 4px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        /* 进度控制 */
+        .progress-check {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        input[type="checkbox"] { transform: scale(1.5); cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="background: #0ea5e9; display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 10px;">自然拼读 · 完整体系</div>
+    <h1>英语字母家族 · 完整路线图</h1>
+    <p>7大层级 · 114组族群 · 从入门到进阶全覆盖</p>
+</header>
+
+<div class="container">
+    <div class="level-card" onclick="toggleDetails('d1')" style="border-left: 6px solid var(--color-1);">
+        <div class="level-badge" style="background-color: var(--color-1);">
+            <span>第一层</span>
+            <strong>30</strong>
+            <span>组</span>
+        </div>
+        <div class="level-content">
+            <h3>短元音家族</h3>
+            <div class="subtitle">A · E · I · O · U (at, an, ap, ad...)</div>
+        </div>
+        <div class="progress-check" onclick="event.stopPropagation()">
+            <input type="checkbox">
+        </div>
+    </div>
+    <div id="d1" class="details">
+        <p><strong>核心内容：</strong> 掌握 5 个元音字母在 CVC 单词中的短音发音。</p>
+        <span class="word-tag">cat</span> <span class="word-tag">bed</span> <span class="word-tag">pig</span> <span class="word-tag">hot</span> <span class="word-tag">cup</span>
+    </div>
+
+    <div class="level-card" onclick="toggleDetails('d2')" style="border-left: 6px solid var(--color-2);">
+        <div class="level-badge" style="background-color: var(--color-2);">
+            <span>第二层</span>
+            <strong>8</strong>
+            <span>组</span>
+        </div>
+        <div class="level-content">
+            <h3>二合辅音家族 Digraphs</h3>
+            <div class="subtitle">CH · SH · TH · WH · PH · CK...</div>
+        </div>
+        <div class="progress-check" onclick="event.stopPropagation()">
+            <input type="checkbox">
+        </div>
+    </div>
+    <div id="d2" class="details">
+        <span class="word-tag">chat</span> <span class="word-tag">ship</span> <span class="word-tag">thin</span> <span class="word-tag">when</span> <span class="word-tag">phone</span>
+    </div>
+
+    <div class="level-card" onclick="toggleDetails('d3')" style="border-left: 6px solid var(--color-3);">
+        <div class="level-badge" style="background-color: var(--color-3);">
+            <span>第三层</span>
+            <strong>20</strong>
+            <span>组</span>
+        </div>
+        <div class="level-content">
+            <h3>辅音连缀家族 Blends</h3>
+            <div class="subtitle">L连缀 · R连缀 · S连缀 · 三辅音</div>
+        </div>
+        <div class="progress-check" onclick="event.stopPropagation()">
+            <input type="checkbox">
+        </div>
+    </div>
+    <div id="d3" class="details">
+        <p>L连缀: BL, CL, FL... | R连缀: BR, CR, DR... | S连缀: SC, SK, SM...</p>
+    </div>
+
+    <footer style="margin-top: 40px; text-align: center; color: #94a3b8; padding-bottom: 50px;">
+        <div style="background: #1a2a44; color: white; padding: 15px; border-radius: 8px;">
+            合计 7 层级 · 114 组族群<br>
+            <small>从短元音入门 → 自主阅读</small>
+        </div>
+        <p style="margin-top: 20px;">我是猫头鹰妈妈 | 一起做自然拼读启蒙</p>
+    </footer>
+</div>
+
+<script>
+    function toggleDetails(id) {
+        const detail = document.getElementById(id);
+        const allDetails = document.querySelectorAll('.details');
+        
+        // 切换当前点击的详情，并关闭其他详情
+        allDetails.forEach(d => {
+            if (d.id === id) {
+                d.classList.toggle('active');
+            } else {
+                d.classList.remove('active');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
