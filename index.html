@@ -2,216 +2,145 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>英语字母家族 · 自然拼读学习路径</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>自然拼读探险 - 第一层级</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary-bg: #1a2a44;
-            --card-bg: #f8fafc;
-            --text-dark: #334155;
-            --color-1: #0ea5e9; --color-2: #10b981; --color-3: #f59e0b;
-            --color-4: #8b5cf6; --color-5: #ef4444; --color-6: #0369a1;
-            --color-7: #475569;
-        }
-
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-dark);
-        }
-
-        header {
-            background-color: var(--primary-bg);
-            color: white;
-            width: 100%;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        header h1 { margin: 10px 0; font-size: 1.8rem; letter-spacing: 1px; }
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
         
-        .container {
-            max-width: 800px;
-            width: 95%;
-            margin: 20px auto;
+        body {
+            font-family: 'Lexend', 'PingFang SC', sans-serif;
+            background: #F0F9FF; /* 清爽的天蓝色背景 */
+            touch-action: manipulation;
         }
 
-        .level-card {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            display: flex;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-left: 6px solid #ccc;
+        /* 模拟滚轮效果 */
+        .picker-container {
+            height: 200px;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
         }
-
-        .level-card:hover { transform: scale(1.01); }
-
-        .level-badge {
-            width: 70px;
+        .picker-container::-webkit-scrollbar { display: none; }
+        
+        .picker-item {
+            height: 100px;
+            scroll-snap-align: center;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        .level-badge span { font-size: 0.7rem; opacity: 0.9; }
-        .level-badge strong { font-size: 1.4rem; }
-
-        .level-content { flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center; }
-        .level-content h3 { margin: 0; font-size: 1.1rem; }
-        .level-content .subtitle { color: #64748b; font-size: 0.85rem; margin-top: 4px; }
-
-        /* 详情区域样式 */
-        .details {
-            display: none;
-            padding: 20px;
-            background: white;
-            border-radius: 0 0 12px 12px;
-            margin-top: -20px;
-            margin-bottom: 15px;
-            border: 1px solid #e2e8f0;
-            border-top: none;
-            animation: slideDown 0.3s ease-out;
-        }
-        .details.active { display: block; }
-
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .group-title { font-weight: bold; color: var(--primary-bg); margin: 10px 0 5px 0; font-size: 0.9rem; }
-        .word-tag {
-            display: inline-block;
-            background: #f1f5f9;
-            padding: 3px 8px;
-            border-radius: 4px;
-            margin: 3px;
-            font-size: 0.85rem;
-            border-bottom: 2px solid #cbd5e1;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            color: #CBD5E1;
         }
 
-        .check-box { padding: 20px; display: flex; align-items: center; }
-        input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        .picker-item.active {
+            color: #0EA5E9;
+            transform: scale(1.2);
+        }
 
-        footer { text-align: center; margin: 30px 0; width: 100%; }
-        .summary-box { background: var(--primary-bg); color: white; padding: 20px; border-radius: 12px; display: inline-block; width: 90%; max-width: 400px; }
+        .word-card {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 2rem;
+        }
+
+        .btn-bounce:active { transform: scale(0.9); }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center justify-between p-4 pb-12">
 
-<header>
-    <div style="background: #0ea5e9; display: inline-block; padding: 4px 15px; border-radius: 20px; font-size: 0.8rem;">自然拼读 · 完整体系</div>
-    <h1>英语字母家族 · 完整路线图</h1>
-    <p>7大层级 · 114组族群 · 一张图看懂全体系</p>
-</header>
+    <header class="w-full max-w-md flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm">
+        <div class="flex items-center space-x-2">
+            <span class="text-2xl">🦉</span>
+            <span class="font-bold text-slate-700">Level 1: Short A</span>
+        </div>
+        <div class="bg-sky-100 text-sky-600 px-3 py-1 rounded-full text-sm font-bold">
+            1 / 30 族群
+        </div>
+    </header>
 
-<div class="container">
-    <div class="level-card" onclick="toggleDetails('d1')" style="border-left-color: var(--color-1);">
-        <div class="level-badge" style="background-color: var(--color-1);"><span>第一层</span><strong>30</strong><span>组</span></div>
-        <div class="level-content"><h3>短元音家族</h3><div class="subtitle">A · E · I · O · U</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d1" class="details">
-        <div class="group-title">核心发音组合：</div>
-        <div class="word-tag">-at</div> <div class="word-tag">-an</div> <div class="word-tag">-ap</div> <div class="word-tag">-ed</div> <div class="word-tag">-ig</div> <div class="word-tag">-og</div> <div class="word-tag">-un</div>
-        <p style="font-size: 0.8rem; color: #666;">（共30组，如：cat, fan, tap, bed, pig, hot, cup）</p>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d2')" style="border-left-color: var(--color-2);">
-        <div class="level-badge" style="background-color: var(--color-2);"><span>第二层</span><strong>8</strong><span>组</span></div>
-        <div class="level-content"><h3>二合辅音家族 Digraphs</h3><div class="subtitle">CH · SH · TH · WH · PH...</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d2" class="details">
-        <div class="word-tag">CH (chat)</div> <div class="word-tag">SH (ship)</div> <div class="word-tag">TH (thin/then)</div> <div class="word-tag">WH (when)</div> <div class="word-tag">PH (phone)</div> <div class="word-tag">CK</div> <div class="word-tag">NG</div> <div class="word-tag">NK</div>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d3')" style="border-left-color: var(--color-3);">
-        <div class="level-badge" style="background-color: var(--color-3);"><span>第三层</span><strong>20</strong><span>组</span></div>
-        <div class="level-content"><h3>辅音连缀家族 Blends</h3><div class="subtitle">L连缀 · R连缀 · S连缀</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d3" class="details">
-        <div class="group-title">L连缀:</div><div class="word-tag">BL-</div> <div class="word-tag">CL-</div> <div class="word-tag">FL-</div> <div class="word-tag">GL-</div> <div class="word-tag">PL-</div> <div class="word-tag">SL-</div>
-        <div class="group-title">R连缀:</div><div class="word-tag">BR-</div> <div class="word-tag">CR-</div> <div class="word-tag">DR-</div> <div class="word-tag">FR-</div> <div class="word-tag">GR-</div> <div class="word-tag">PR-</div> <div class="word-tag">TR-</div>
-        <div class="group-title">S连缀:</div><div class="word-tag">SC-</div> <div class="word-tag">SK-</div> <div class="word-tag">SM-</div> <div class="word-tag">SN-</div> <div class="word-tag">SP-</div> <div class="word-tag">ST-</div> <div class="word-tag">SW-</div>
-        <div class="group-title">三辅音:</div><div class="word-tag">SCR-</div> <div class="word-tag">STR-</div> <div class="word-tag">SPL-</div>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d4')" style="border-left-color: var(--color-4);">
-        <div class="level-badge" style="background-color: var(--color-4);"><span>第四层</span><strong>18</strong><span>组</span></div>
-        <div class="level-content"><h3>辅音结尾家族 Ending Blends</h3><div class="subtitle">-nd · -nt · -mp · -st · -lt...</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d4" class="details">
-        <div class="group-title">常见组合与示例：</div>
-        <div class="word-tag">-nd (band)</div> <div class="word-tag">-nt (bent)</div> <div class="word-tag">-mp (camp)</div> <div class="word-tag">-nk (sink)</div> <div class="word-tag">-ng (ring)</div> 
-        <div class="word-tag">-st (best)</div> <div class="word-tag">-sk (desk)</div> <div class="word-tag">-ft (gift)</div> <div class="word-tag">-lt (belt)</div> <div class="word-tag">-lk (milk)</div>
-        <p style="font-size: 0.8rem; color: #666;">另含 -ld, -lf, -lm, -pt, -ct, -xt 等共 18 组</p>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d5')" style="border-left-color: var(--color-5);">
-        <div class="level-badge" style="background-color: var(--color-5);"><span>第五层</span><strong>23</strong><span>组</span></div>
-        <div class="level-content"><h3>长元音家族 Long Vowels</h3><div class="subtitle">Magic E · 元音组合 AI, EE, OA...</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d5" class="details">
-        <div class="group-title">Magic E (A-E, I-E, O-E, U-E):</div>
-        <div class="word-tag">cake/game</div> <div class="word-tag">bike/time</div> <div class="word-tag">bone/hope</div> <div class="word-tag">cute/tune</div>
-        <div class="group-title">元音组合:</div>
-        <div class="word-tag">AI/AY (mail/day)</div> <div class="word-tag">EE/EA (tree/bean)</div> <div class="word-tag">OA/OW (boat/low)</div> 
-        <div class="word-tag">OU/OI (out/boy)</div> <div class="word-tag">IE (pie/field)</div>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d6')" style="border-left-color: var(--color-6);">
-        <div class="level-badge" style="background-color: var(--color-6);"><span>第六层</span><strong>5</strong><span>组</span></div>
-        <div class="level-content"><h3>R控元音家族 R-controlled</h3><div class="subtitle">AR · ER · IR · OR · UR</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d6" class="details">
-        <div class="word-tag">AR (car/star)</div> <div class="word-tag">ER (her/fern)</div> <div class="word-tag">IR (bird/girl)</div> <div class="word-tag">OR (for/born)</div> <div class="word-tag">UR (burn/turn)</div>
-    </div>
-
-    <div class="level-card" onclick="toggleDetails('d7')" style="border-left-color: var(--color-7);">
-        <div class="level-badge" style="background-color: var(--color-7);"><span>第七层</span><strong>10</strong><span>组</span></div>
-        <div class="level-content"><h3>特殊发音家族</h3><div class="subtitle">静音字母 · 软C/G · 双音 · EW/AU...</div></div>
-        <div class="check-box" onclick="event.stopPropagation()"><input type="checkbox"></div>
-    </div>
-    <div id="d7" class="details">
-        <div class="group-title">静音字母:</div><div class="word-tag">KN- (knife)</div> <div class="word-tag">WR- (wrap)</div> <div class="word-tag">-MB (thumb)</div> <div class="word-tag">-GH (night)</div>
-        <div class="group-title">特殊规则:</div><div class="word-tag">软C/软G (gem)</div> <div class="word-tag">OO双音 (food/book)</div> <div class="word-tag">AU/AW (saw)</div> <div class="word-tag">EW (new)</div>
-    </div>
-</div>
-
-<footer>
-    <div class="summary-box">
-        合计 7 层级 · 114 组族群<br>
-        从短元音入门 → 自主阅读
-    </div>
-    <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">我是猫头鹰妈妈 | 一起做自然拼读启蒙</p>
-</footer>
-
-<script>
-    function toggleDetails(id) {
-        const detail = document.getElementById(id);
-        const isActive = detail.classList.contains('active');
+    <main class="w-full max-w-md bg-white word-card p-8 flex flex-col items-center relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-sky-50 rounded-full"></div>
         
-        // 先关闭所有详情
-        document.querySelectorAll('.details').forEach(d => d.classList.remove('active'));
-        
-        // 如果之前不是打开状态，则打开当前的
-        if (!isActive) {
-            detail.classList.add('active');
+        <div class="flex items-center justify-center space-x-4 mb-8">
+            <div class="picker-container w-24 border-r-2 border-dashed border-sky-100" id="onsetPicker">
+                </div>
+
+            <div class="text-7xl font-extrabold text-orange-500" id="rimesDisplay">
+                -at
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="text-sm uppercase tracking-widest text-slate-400 mb-2">Can you read it?</div>
+            <div class="text-5xl font-black text-slate-800 mb-6" id="fullWord">cat</div>
+            <button onclick="speakWord()" class="btn-bounce bg-sky-500 hover:bg-sky-600 text-white w-16 h-16 rounded-full shadow-lg flex items-center justify-center text-2xl mx-auto transition-all">
+                🔊
+            </button>
+        </div>
+    </main>
+
+    <section class="w-full max-w-md bg-orange-50 p-6 rounded-3xl border-2 border-orange-100">
+        <p class="text-center italic text-orange-800 text-lg" id="sentenceDisplay">
+            The <span class="font-bold underline">cat</span> sat on the mat.
+        </p>
+    </section>
+
+    <nav class="flex space-x-4">
+        <button class="bg-white p-4 rounded-2xl shadow-sm btn-bounce text-slate-400">上一个</button>
+        <button class="bg-white p-4 rounded-2xl shadow-sm btn-bounce text-sky-500 font-bold">下一个</button>
+    </nav>
+
+    <script>
+        // 1. 数据雏形 (后续可扩充到30组)
+        const currentData = {
+            family: "-at",
+            onsets: ["c", "b", "h", "m", "f", "r", "p"],
+            sentence: "The {word} sat on the mat."
+        };
+
+        const onsetPicker = document.getElementById('onsetPicker');
+        const fullWordDisplay = document.getElementById('fullWord');
+        const sentenceDisplay = document.getElementById('sentenceDisplay');
+
+        // 2. 初始化滚轮
+        function initPicker() {
+            currentData.onsets.forEach((letter, index) => {
+                const div = document.createElement('div');
+                div.className = `picker-item ${index === 0 ? 'active' : ''}`;
+                div.innerText = letter;
+                onsetPicker.appendChild(div);
+            });
         }
-    }
-</script>
 
+        // 3. 监听滚动并更新单词
+        onsetPicker.addEventListener('scroll', () => {
+            const index = Math.round(onsetPicker.scrollTop / 100);
+            const items = document.querySelectorAll('.picker-item');
+            
+            items.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            if(currentData.onsets[index]) {
+                const currentOnset = currentData.onsets[index];
+                const word = currentOnset + currentData.family.replace('-', '');
+                fullWordDisplay.innerText = word;
+                sentenceDisplay.innerHTML = currentData.sentence.replace('{word}', `<span class="font-bold underline">${word}</span>`);
+            }
+        });
+
+        // 4. 语音合成 (Web Speech API)
+        function speakWord() {
+            const word = fullWordDisplay.innerText;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.8; // 语速稍慢，适合孩子
+            window.speechSynthesis.speak(utterance);
+        }
+
+        initPicker();
+    </script>
 </body>
 </html>
